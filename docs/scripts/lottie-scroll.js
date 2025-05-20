@@ -5,8 +5,11 @@ function initCodeByScrollLottie() {
   const input = container.querySelector('#lottie_url')
   const inputClass = container.querySelector('#lottie_div')
   const inputId = container.querySelector('#lottie_canvas')
+  const inputWidth = container.querySelector('#lottie_width')
+  const inputHeight = container.querySelector('#lottie_height')
   const generateBtn = container.querySelector('#generate_dotlottie')
   const copyBtn = container.querySelector('#copy_dotlottie')
+  const title = container.querySelector('#title')
   const output = container.querySelector('#dotlottie_output')
 
   function isValidDirectLink(url) {
@@ -22,22 +25,30 @@ function initCodeByScrollLottie() {
       const url = input.value.trim()
       const className = inputClass.value.trim()
       const canvasId = inputId.value.trim()
+      const width = inputWidth.value.trim() || '300'
+      const height = inputHeight.value.trim() || '300'
+
       if (!isValidDirectLink(url)) {
         alert(
           'Введите корректный прямой URL на .lottie или .json файл (без /embed/ в ссылке)'
         )
         return
       }
-      const code = `<canvas id="${canvasId}" style="width: 100%; height: 100%;"></canvas>
-<script type="module">
+      const code = `<script type="module" defer>
   import { DotLottie } from "https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-web/+esm";
 
   const initLottieAnimation = () => {
     const lottieContainer = document.querySelector(".${className}");
-    const canvas = document.getElementById("${canvasId}");
-    if (!lottieContainer || !canvas) return;
+    if (!lottieContainer) return;
 
+    const canvas = document.createElement('canvas');
+    canvas.id = "${canvasId}";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+
+    lottieContainer.innerHTML = '';
     lottieContainer.appendChild(canvas);
+
     const animation = new DotLottie({
       canvas: canvas,
       src: "${url}",
@@ -68,10 +79,18 @@ function initCodeByScrollLottie() {
   } else {
     window.addEventListener('load', initLottieAnimation);
   }
-<\/script>`
+<\/script>
+
+ <style>
+    .${className} {
+      width: ${width}px;
+      height: ${height}px;
+    }
+  </style>`
       output.textContent = code
       output.style.display = 'block'
       copyBtn.style.display = 'inline-block'
+      title.style.display = 'block'
     })
     generateBtn.hasListener = true
   }

@@ -8,6 +8,8 @@
 
 #lottie_url,
 #lottie_div,
+#lottie_width,
+#lottie_height,
 #lottie_canvas {
   width: 100%;
   padding: 8px;
