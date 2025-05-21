@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
   <link rel="stylesheet" href="./styles/lottie.css">
   <link rel="stylesheet" href="./styles/lottieByScroll.css">
+  <link rel="stylesheet" href="./styles/lottieSegment.css">
 </head>
 
 <body>
@@ -38,14 +39,18 @@
             if (typeof initCodeByScrollLottie === 'function') {
               initCodeByScrollLottie();
             }
+            if (typeof initSegmentScrollLottie === 'function') {
+              initSegmentScrollLottie();
+            }
           });
         }
       ]
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="./scripts/lottie.js"></script>
-  <script src="./scripts/lottie-scroll.js"></script>
+  <script src="./scripts/lottie.js" defer></script>
+  <script src="./scripts/lottie-scroll.js" defer></script>
+  <script src="./scripts/lottie-segment-animation.js" defer></script>
 </body>
 
 </html>
