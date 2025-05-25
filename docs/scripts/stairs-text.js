@@ -23,36 +23,7 @@ function initStairsGenerator() {
         return
       }
 
-      const code = `<style>
-  .js-stairs-text-animation-steps-child {
-    display: inline-block;
-    overflow: hidden;
-    height: 0;
-    opacity: ${initialOpacity};
-    line-height: normal;
-    vertical-align: bottom;
-    animation: js-stairs-text-animation-steps ${animationSpeed} forwards;
-    transition: all ${animationSpeed} ease;
-  }
-
-  .js-stairs-text-animation-steps-child span {
-        display: block;
-        transform: translateY(0);
-      }
-
-  @keyframes js-stairs-text-animation-steps {
-    0% {
-      height: 0;
-      opacity: 1;
-    }
-    100% {
-      height: 1.02em;
-      opacity: 1;
-    }
-  }
-</style>
-
-<script defer>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     
@@ -132,7 +103,37 @@ function initStairsGenerator() {
 
     animatedElements.forEach(element => observer.observe(element));
   });
-<\/script>`
+<\/script>
+
+<style>
+  .js-stairs-text-animation-steps-child {
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+    opacity: ${initialOpacity};
+    line-height: normal;
+    vertical-align: bottom;
+    animation: js-stairs-text-animation-steps ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
+  }
+
+  .js-stairs-text-animation-steps-child span {
+        display: block;
+        transform: translateY(0);
+      }
+
+  @keyframes js-stairs-text-animation-steps {
+    0% {
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      height: 1.02em;
+      opacity: 1;
+    }
+  }
+</style>
+`
 
       output.textContent = code
       output.style.display = 'block'
