@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="./assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Taptop" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="manifest" href="./assets/site.webmanifest" />
   <title>Taptop Lottie</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./styles/lottie.css">
   <link rel="stylesheet" href="./styles/lottieByScroll.css">
   <link rel="stylesheet" href="./styles/lottieSegment.css">
+  <link rel="stylesheet" href="./styles/stairs-text.css">
 </head>
 
 <body>
@@ -42,6 +43,9 @@
             if (typeof initSegmentScrollLottie === 'function') {
               initSegmentScrollLottie();
             }
+            if (typeof initStairsGenerator === 'function') {
+              initStairsGenerator();
+            }
           });
         }
       ]
@@ -51,6 +55,7 @@
   <script src="./scripts/lottie.js" defer></script>
   <script src="./scripts/lottie-scroll.js" defer></script>
   <script src="./scripts/lottie-segment-animation.js" defer></script>
+  <script src="./scripts/stairs-text.js" defer></script>
 </body>
 
 </html>

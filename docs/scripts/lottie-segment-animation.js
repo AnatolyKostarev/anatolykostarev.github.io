@@ -58,8 +58,8 @@ function initSegmentScrollLottie() {
 
     // Конфигурация сегментов
     const segments = [
-      { duration: 2 },  // Первый сегмент - 2 секунды
-      { duration: 2 },  // Второй сегмент - 2 секунды
+      { duration: 3 },  // Первый сегмент - 2 секунды
+      { duration: 3 },  // Второй сегмент - 2 секунды
       { duration: 0 }   // Третий сегмент - до конца
     ];
     let currentSegment = 0;
