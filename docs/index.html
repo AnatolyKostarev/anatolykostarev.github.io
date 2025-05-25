@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./styles/lottieByScroll.css">
   <link rel="stylesheet" href="./styles/lottieSegment.css">
   <link rel="stylesheet" href="./styles/stairs-text.css">
+  <link rel="stylesheet" href="./styles/change-text.css">
 </head>
 
 <body>
@@ -43,8 +44,11 @@
             if (typeof initSegmentScrollLottie === 'function') {
               initSegmentScrollLottie();
             }
-            if (typeof initStairsGenerator === 'function') {
-              initStairsGenerator();
+            if (typeof initStairsTextGenerator === 'function') {
+              initStairsTextGenerator();
+            }
+            if (typeof initChangeGenerator === 'function') {
+              initChangeGenerator();
             }
           });
         }
@@ -56,6 +60,7 @@
   <script src="./scripts/lottie-scroll.js" defer></script>
   <script src="./scripts/lottie-segment-animation.js" defer></script>
   <script src="./scripts/stairs-text.js" defer></script>
+  <script src="./scripts/change-text.js" defer></script>
 </body>
 
 </html>

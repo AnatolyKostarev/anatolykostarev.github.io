@@ -1,4 +1,4 @@
-function initStairsGenerator() {
+function initStairsTextGenerator() {
   const container = document.getElementById('stairs-generator')
   if (!container) return
 
@@ -43,8 +43,8 @@ function initStairsGenerator() {
 
     // Настройки анимации
     const animationSettings = {
-      startOpacity: '1',
-      animationSpeed: '0.3s',
+      startOpacity: ${initialOpacity},
+      animationSpeed: '${animationSpeed}',
       delayBetweenChars: 0.1,
       slowdownEffect: false,
       endSlowdownEffect: false
