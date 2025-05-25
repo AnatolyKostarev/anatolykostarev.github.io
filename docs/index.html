@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="./styles/lottieSegment.css">
   <link rel="stylesheet" href="./styles/stairs-text.css">
   <link rel="stylesheet" href="./styles/change-text.css">
+  <link rel="stylesheet" href="./styles/counter-text.css">
 </head>
 
 <body>
@@ -50,6 +51,9 @@
             if (typeof initChangeGenerator === 'function') {
               initChangeGenerator();
             }
+            if (typeof initCounterGenerator === 'function') {
+              initCounterGenerator();
+            }
           });
         }
       ]
@@ -61,6 +65,7 @@
   <script src="./scripts/lottie-segment-animation.js" defer></script>
   <script src="./scripts/stairs-text.js" defer></script>
   <script src="./scripts/change-text.js" defer></script>
+  <script src="./scripts/counter-text.js" defer></script>
 </body>
 
 </html>
