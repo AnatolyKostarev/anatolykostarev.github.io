@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="./styles/stairs-text.css">
   <link rel="stylesheet" href="./styles/change-text.css">
   <link rel="stylesheet" href="./styles/counter-text.css">
+  <link rel="stylesheet" href="./styles/page-vertical-scroll.css">
 </head>
 
 <body>
@@ -54,6 +55,9 @@
             if (typeof initCounterGenerator === 'function') {
               initCounterGenerator();
             }
+            if (typeof initFullpageGenerator === 'function') {
+              initFullpageGenerator();
+            }
           });
         }
       ]
@@ -66,6 +70,7 @@
   <script src="./scripts/stairs-text.js" defer></script>
   <script src="./scripts/change-text.js" defer></script>
   <script src="./scripts/counter-text.js" defer></script>
+  <script src="./scripts/page-vertical.scroll.js" defer></script>
 </body>
 
 </html>
