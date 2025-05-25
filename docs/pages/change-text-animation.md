@@ -8,8 +8,6 @@
 <!-- markdownlint-disable MD033 -->
 
 <div id="change-generator">
-  <label for="change-text" style="font-weight:bold;">Текст для анимации:</label>
-  <input type="text" id="change-text" value="" placeholder="текст для анимации">
   <label for="change-animationID" style="font-weight:bold;">Идентификатор анимации:</label>
   <input type="text" id="change-animationID" value="" placeholder="js-script-01">
   <label for="change-animationSpeed" style="font-weight:bold;">Скорость анимации:</label>

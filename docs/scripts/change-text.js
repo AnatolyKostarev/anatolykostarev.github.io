@@ -2,7 +2,6 @@ function initChangeGenerator() {
   const container = document.getElementById('change-generator')
   if (!container) return
 
-  const textInput = container.querySelector('#change-text')
   const animationIdInput = container.querySelector('#change-animationID')
   const speedInput = container.querySelector('#change-animationSpeed')
   const colorFromInput = container.querySelector('#change-colorFrom')
@@ -15,18 +14,12 @@ function initChangeGenerator() {
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
-      const text = textInput.value.trim()
       const animationIdentifier =
         animationIdInput.value.trim() || 'js-script-01'
       const animationSpeed = speedInput.value.trim() || '0.3s'
       const colorFrom = colorFromInput.value.trim() || '#ffffff'
       const colorTo = colorToInput.value.trim() || '#43a268'
       const blurAmount = blurInput.value.trim() || '5px'
-
-      if (!text) {
-        alert('Пожалуйста, введите текст для анимации')
-        return
-      }
 
       const code = `<script>
   document.addEventListener('DOMContentLoaded', () => {
