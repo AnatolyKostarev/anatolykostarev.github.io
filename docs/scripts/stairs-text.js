@@ -35,6 +35,11 @@ function initStairsGenerator() {
     transition: all ${animationSpeed} ease;
   }
 
+  .js-stairs-text-animation-steps-child span {
+        display: block;
+        transform: translateY(0);
+      }
+
   @keyframes js-stairs-text-animation-steps {
     0% {
       height: 0;
