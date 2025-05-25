@@ -7,4 +7,5 @@
 * [Text - анимация fade, blur, изменение цвета](/pages/change-text-animation.md)
 * [Text - анимация прокрутки текста](/pages/counter-text-animation.md)
 * [Page Scroll - анимация вертикального скролла](/pages/page-vertical-scroll.md)
+* [Page Scroll - анимация горизантального скролла](/pages/page-horizontal-scroll.md)
 <!-- markdownlint-disable MD041 -->

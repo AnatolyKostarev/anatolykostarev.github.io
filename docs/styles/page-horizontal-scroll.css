@@ -1,0 +1,45 @@
+#hor-fullpage-generator {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  max-width: 700px;
+}
+
+#hor-fullpage-count {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#hor-generate-fullpage {
+  padding: 8px 16px;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#hor-copy-fullpage {
+  display: none;
+  padding: 8px 16px;
+  margin-left: 10px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#hor-fullpage-output {
+  margin-top: 15px;
+  background: #eee;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  display: none;
+  font-family: Consolas, monospace;
+  color: #000000;
+}
