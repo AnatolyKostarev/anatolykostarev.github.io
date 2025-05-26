@@ -22,59 +22,109 @@ function initCounterGenerator() {
       const code = `<script>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
-    const textElements = document.querySelectorAll(\`[class*="js-counter-text-animation"][class*="\${animationIdentifier}"]\`);
-    
-    const getChildClassName = (className) => {
-      const animationClassName = className.split(' ').find((cls) => cls.includes('js-counter-text-animation'));
-      return animationClassName ? \`\${animationClassName}-child\` : '';
-    };
+     const textElements = document.querySelectorAll(\`[class*="js-counter-text-animation"][class*="\${animationIdentifier}"]\`);
+        const getChildClassName = (className) => {
+          const animationClassName = className.split(' ').find((cls) => cls.includes('js-counter-text-animation'));
 
-    document.documentElement.style.setProperty('--animation-speed', '${animationSpeed}');
-    document.documentElement.style.setProperty('--start-opacity-t1', '${startOpacityT1}');
-    document.documentElement.style.setProperty('--opacity-t2', '${opacityT2}');
+          if (!animationClassName) return '';
+          return \`\${animationClassName}-child-${animationIdentifier}\`;
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateElement(entry.target);
-          observer.unobserve(entry.target);
+        const animationSettings = {
+          animationSpeed: '${animationSpeed}',
+          startOpacityT1: ${startOpacityT1},
+          opacityT2: ${opacityT2},
+        };
+
+         const slowdownEffect = false;
+        const endSlowdownEffect = false;
+
+        const originalTexts = new Map();
+        const animatedElements = new Map();
+
+   const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (!animatedElements.get(entry.target)) {
+                  animateElement(entry.target);
+                  animatedElements.set(entry.target, true);
+                }
+              }
+            });
+          },
+          {
+            threshold: 0.2,
+          }
+        );
+
+         function resetElement(element) {
+          const originalText = originalTexts.get(element);
+          if (originalText) {
+            element.innerHTML = originalText;
+          }
         }
-      });
-    }, { threshold: 0.2 });
+    
+        function animateElement(element) {
+          const className = element.className;
+          if (!className) return;
 
-    function animateElement(element) {
-      const className = element.className;
-      if (!className) return;
-      
-      const text = element.textContent.trim();
-      element.innerHTML = '';
-      const characters = text.split('');
-      const childClassName = getChildClassName(className);
-      let delay = 0;
+          if (!originalTexts.has(element)) {
+            originalTexts.set(element, element.textContent.trim());
+          }
 
-      characters.forEach((char) => {
-        const charSpan = document.createElement('span');
-        charSpan.className = childClassName;
+          const text = element.textContent.trim();
+          element.innerHTML = '';
+          const characters = text.split('');
+          const childClassName = getChildClassName(className);
 
-        const firstChar = document.createElement('span');
-        firstChar.className = \`\${childClassName}-first\`;
-        firstChar.textContent = char;
-        firstChar.style.animationDelay = \`\${delay}s\`;
+          const animationDalay = 0.1;
+          let delay = 0;
 
-        const secondChar = document.createElement('span');
-        secondChar.className = \`\${childClassName}-second\`;
-        secondChar.textContent = char;
-        secondChar.style.animationDelay = \`\${delay}s\`;
+          const totalChars = characters.length;
 
-        charSpan.appendChild(firstChar);
-        charSpan.appendChild(secondChar);
-        element.appendChild(charSpan);
-        
-        delay += 0.1;
-      });
-    }
+          characters.forEach((char, index) => {
+            const charSpan = document.createElement('span');
+            charSpan.className = childClassName;
 
-    textElements.forEach((element) => observer.observe(element));
+            const firstChar = document.createElement('span');
+            firstChar.className = \`\${childClassName}-first\`;
+            firstChar.textContent = char;
+
+            const secondChar = document.createElement('span');
+            secondChar.className = \`\${childClassName}-second\`;
+            secondChar.textContent = char;
+
+            charSpan.appendChild(firstChar);
+            charSpan.appendChild(secondChar);
+
+            const position = index / (totalChars - 1 || 1);
+            let totalSlowdownFactor = 0;
+
+            if (slowdownEffect) {
+              if (position < 0.33) {
+              } else if (position < 0.5) {
+                const normalizedPos = (position - 0.33) / (0.5 - 0.33);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              } else if (position < 0.7) {
+                const normalizedPos = 1 - (position - 0.5) / (0.7 - 0.5);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              }
+            }
+            if (endSlowdownEffect && position >= 0.6) {
+              const normalizedEndPos = (position - 0.6) / (1 - 0.6);
+              totalSlowdownFactor += Math.pow(normalizedEndPos, 2) * 3;
+            }
+            delay += animationDalay * (1 + totalSlowdownFactor);
+            firstChar.style.animationDelay = \`\${delay}s\`;
+            secondChar.style.animationDelay = \`\${delay}s\`;
+            element.appendChild(charSpan);
+          });
+        }
+
+        textElements.forEach((element) => {
+          observer.observe(element);
+        });
   });
 </script>
 
@@ -85,48 +135,48 @@ function initCounterGenerator() {
     flex-wrap: wrap;
   }
 
-  .js-counter-text-animation-t1-child,
-  .js-counter-text-animation-t2-child {
+  .js-counter-text-animation-t1-child-${animationIdentifier},
+  .js-counter-text-animation-t2-child-${animationIdentifier} {
     display: inline-flex;
     flex-direction: column;
     overflow: hidden;
     vertical-align: bottom;
-    height: 1.02em;
+    height: 1.04em;
     line-height: 100%;
   }
 
-  .js-counter-text-animation-t1-child-first {
-    animation: counter-first ${animationSpeed} forwards;
+  .js-counter-text-animation-t1-child-${animationIdentifier}-first {
+    animation: js-counter-text-animation-t1-child-${animationIdentifier}-first ${animationSpeed} forwards;
     transform: translateY(103%);
   }
 
-  @keyframes counter-first {
+  @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-first {
     0% { transform: translateY(103%); }
     20% { transform: translateY(0); }
     50% { transform: translateY(0); }
     100% { transform: translateY(-110%); }
   }
 
-  .js-counter-text-animation-t1-child-second {
-    animation: js-counter-text-animation-t1 ${animationSpeed} forwards;
+  .js-counter-text-animation-t1-child-${animationIdentifier}-second {
+    animation: js-counter-text-animation-t1-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(100%);
     opacity: ${startOpacityT1};
   }
 
-  @keyframes js-counter-text-animation-t1 {
+  @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-second {
     0% { transform: translateY(100%); opacity: ${startOpacityT1}; }
     20% { transform: translateY(0); opacity: ${startOpacityT1}; }
     50% { transform: translateY(0); opacity: ${startOpacityT1}; }
-    100% { transform: translateY(-110%); opacity: 1; }
+    100% { transform: translateY(-100%); opacity: 1; }
   }
 
-  .js-counter-text-animation-t2-child-second {
-    animation: js-counter-text-animation-t2 ${animationSpeed} forwards;
+  .js-counter-text-animation-t2-child-${animationIdentifier}-second {
+    animation: js-counter-text-animation-t2-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(0);
     opacity: ${opacityT2};
   }
 
-  @keyframes js-counter-text-animation-t2 {
+  @keyframes js-counter-text-animation-t2-child-${animationIdentifier}-second {
     0% { transform: translateY(0); }
     20% { transform: translateY(-100%); }
     50% { transform: translateY(-100%); }

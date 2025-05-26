@@ -2,7 +2,6 @@ function initStairsTextGenerator() {
   const container = document.getElementById('stairs-generator')
   if (!container) return
 
-  const textInput = container.querySelector('#text')
   const animationIdInput = container.querySelector('#animationIdentifier')
   const animationSpeedInput = container.querySelector('#animationSpeed')
   const initialOpacityInput = container.querySelector('#start-opacity')
@@ -13,116 +12,129 @@ function initStairsTextGenerator() {
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
-      const text = textInput.value.trim()
       const animationIdentifier = animationIdInput.value.trim() || 'js-script'
       const animationSpeed = animationSpeedInput.value.trim() || '0.3s'
       const initialOpacity = initialOpacityInput.value.trim() || '1'
-
-      if (!text) {
-        alert('Пожалуйста, введите текст для анимации')
-        return
-      }
 
       const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     
-    // Добавляем идентификатор к существующим элементам
-    const textElements = document.querySelectorAll('.js-stairs-text-animation-steps');
-    textElements.forEach(el => {
-      el.classList.add(animationIdentifier);
-      el.textContent = '${text}';
-    });
+    const textElements = document.querySelectorAll(\`[class*="js-stairs-text-animation"][class*="${animationIdentifier}"]\`);
+        const getChildClassName = (className) => {
+          const animationClassName = className.split(' ').find((cls) => cls.includes('js-stairs-text-animation'));
 
-    const animatedElements = document.querySelectorAll(\`[class*="js-stairs-text-animation"][class*="\${animationIdentifier}"]\`);
-    
-    const getChildClassName = (className) => {
-      const animationClassName = className.split(' ').find((cls) => cls.includes('js-stairs-text-animation'));
-      return animationClassName ? \`\${animationClassName}-child\` : '';
-    };
+          if (!animationClassName) return '';
+          return \`\${animationClassName}-child-${animationIdentifier}\`;
+        };
 
-    // Настройки анимации
     const animationSettings = {
       startOpacity: ${initialOpacity},
       animationSpeed: '${animationSpeed}',
-      delayBetweenChars: 0.1,
-      slowdownEffect: false,
-      endSlowdownEffect: false
     };
 
-    document.documentElement.style.setProperty('--start-opacity', animationSettings.startOpacity);
-    document.documentElement.style.setProperty('--animation-speed', animationSettings.animationSpeed);
+     const slowdownEffect = false;
+    const endSlowdownEffect = false;
+
+    const originalTexts = new Map();
+    const animatedElements = new Map();
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateElement(entry.target);
-            observer.unobserve(entry.target);
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (!animatedElements.get(entry.target)) {
+                  animateElement(entry.target);
+                  animatedElements.set(entry.target, true);
+                }
+              }
+            });
+          },
+          {
+            threshold: 0.2,
           }
+        );
+
+         function resetElement(element) {
+          const originalText = originalTexts.get(element);
+          if (originalText) {
+            element.innerHTML = originalText;
+          }
+        }
+
+        function animateElement(element) {
+          const className = element.className;
+          if (!className) return;
+
+          if (!originalTexts.has(element)) {
+            originalTexts.set(element, element.textContent.trim());
+          }
+
+          const text = element.textContent.trim();
+          element.innerHTML = '';
+          const characters = text.split('');
+          const childClassName = getChildClassName(className);
+
+          const animationDalay = 0.1;
+          let delay = 0;
+
+          const totalChars = characters.length;
+
+          characters.forEach((char, index) => {
+            const charSpan = document.createElement('span');
+            charSpan.className = childClassName;
+
+            charSpan.textContent = char;
+
+            const position = index / (totalChars - 1 || 1);
+            let totalSlowdownFactor = 0;
+
+            if (slowdownEffect) {
+              if (position < 0.33) {
+              } else if (position < 0.5) {
+                const normalizedPos = (position - 0.33) / (0.5 - 0.33);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              } else if (position < 0.7) {
+                const normalizedPos = 1 - (position - 0.5) / (0.7 - 0.5);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              }
+            }
+            if (endSlowdownEffect && position >= 0.6) {
+              const normalizedEndPos = (position - 0.6) / (1 - 0.6);
+              totalSlowdownFactor += Math.pow(normalizedEndPos, 2) * 3;
+            }
+            delay += animationDalay * (1 + totalSlowdownFactor);
+            charSpan.style.animationDelay = \`\${delay}s\`;
+            element.appendChild(charSpan);
+          });
+        }
+
+        textElements.forEach((element) => {
+          observer.observe(element);
         });
-      },
-      { threshold: 0.2 }
-    );
-
-    function animateElement(element) {
-      const className = element.className;
-      if (!className) return;
-
-      const text = element.textContent.trim();
-      element.innerHTML = '';
-      
-      const characters = text.split('');
-      const childClassName = getChildClassName(className);
-      let delay = 0;
-
-      characters.forEach((char, index) => {
-        const charSpan = document.createElement('span');
-        charSpan.className = childClassName;
-        charSpan.textContent = char;
-
-        let totalSlowdownFactor = 0;
-        const position = index / (characters.length - 1 || 1);
-        
-        if (animationSettings.slowdownEffect && position >= 0.33 && position < 0.7) {
-          const normalizedPos = position < 0.5 
-            ? (position - 0.33) / (0.5 - 0.33)
-            : 1 - (position - 0.5) / (0.7 - 0.5);
-          totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
-        }
-        
-        if (animationSettings.endSlowdownEffect && position >= 0.6) {
-          totalSlowdownFactor += Math.pow((position - 0.6) / 0.4, 2) * 3;
-        }
-
-        delay += animationSettings.delayBetweenChars * (1 + totalSlowdownFactor);
-        charSpan.style.animationDelay = \`\${delay}s\`;
-        element.appendChild(charSpan);
-      });
-    }
-
-    animatedElements.forEach(element => observer.observe(element));
+    
   });
 <\/script>
 
 <style>
-  .js-stairs-text-animation-steps-child {
+  .js-stairs-text-animation-steps-child-${animationIdentifier} {
     display: inline-block;
     overflow: hidden;
     height: 0;
     opacity: ${initialOpacity};
     line-height: normal;
     vertical-align: bottom;
-    animation: js-stairs-text-animation-steps ${animationSpeed} forwards;
+    animation: js-stairs-text-animation-steps-${animationIdentifier} ${animationSpeed} forwards;
     transition: all ${animationSpeed} ease;
+    text-transform: uppercase;
   }
 
-  .js-stairs-text-animation-steps-child span {
+  .js-stairs-text-animation-steps-child-${animationIdentifier} span {
         display: block;
         transform: translateY(0);
       }
 
-  @keyframes js-stairs-text-animation-steps {
+  @keyframes js-stairs-text-animation-steps-${animationIdentifier} {
     0% {
       height: 0;
       opacity: 1;

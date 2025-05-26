@@ -1,6 +1,10 @@
-# Text Animation
+# Text Animation работает только с текстовыми элементами (элементы/типографика/текст)
 
 ## Генератор кода для анимации текста
+
+## Как использовать
+
+1. ****  
 
 ## Форма для генерации кода
 
@@ -8,8 +12,6 @@
 <!-- markdownlint-disable MD033 -->
 
 <div id="stairs-generator">
-  <label for="text" style="font-weight:bold;">Текст для анимации:</label>
-  <input type="text" id="text" value="" placeholder="текст для анимации">
   <label for="animationIdentifier" style="font-weight:bold;">Идентификатор анимации:</label>
   <input type="text" id="animationIdentifier" value="" placeholder="js-script">
   <label for="animationSpeed" style="font-weight:bold;">Скорость анимации:</label>

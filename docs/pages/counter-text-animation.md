@@ -12,9 +12,9 @@
   <input type="text" id="counter-animationID" value="" placeholder="js-script-03">
   <label for="counter-animationSpeed" style="font-weight:bold;">Скорость анимации:</label>
   <input type="text" id="counter-animationSpeed" value="2.5s" placeholder="2.5s">
-  <label for="counter-startOpacityT1" style="font-weight:bold;">Начальная прозрачность анимации:</label>
+  <label for="counter-startOpacityT1" style="font-weight:bold;">Начальная прозрачность анимации второго слоя:</label>
   <input type="text" id="counter-startOpacityT1" value="0" placeholder="0">
-  <label for="counter-opacityT2" style="font-weight:bold;">Конечная прозрачность анимации:</label>
+  <label for="counter-opacityT2" style="font-weight:bold;">Конечная прозрачность анимации второго слоя:</label>
   <input type="text" id="counter-opacityT2" value="0.5" placeholder="0.5">
   
   <button id="generate-counter">Сгенерировать код</button>

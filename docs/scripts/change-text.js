@@ -28,7 +28,7 @@ function initChangeGenerator() {
     
     const getChildClassName = (className) => {
       const animationClassName = className.split(' ').find((cls) => cls.includes('js-text-animation'));
-      return animationClassName ? \`\${animationClassName}-child\` : '';
+      return animationClassName ? \`\${animationClassName}-child-${animationIdentifier}\` : '';
     };
 
     const animationSettings = {
@@ -45,52 +45,134 @@ function initChangeGenerator() {
     document.documentElement.style.setProperty('--blur-amount', animationSettings.blurAmount);
     document.documentElement.style.setProperty('--animation-speed', animationSettings.animationSpeed);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateElement(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
+    const slowdownEffect = true;
+      const endSlowdownEffect = false;
 
-    function animateElement(element) {
-      const className = element.className;
-      if (!className) return;
-      
-      const text = element.textContent.trim();
-      element.innerHTML = '';
-      const characters = text.split('');
-      const childClassName = getChildClassName(className);
-      const isSequentialAnimation = className.includes('colorLRRL');
-      const charElements = [];
-      let delay = 0;
+      const originalTexts = new Map();
+      const animatedElements = new Map();
+      const lastTopPositions = new Map();
 
-      characters.forEach((char, index) => {
-        const charSpan = document.createElement('span');
-        charSpan.className = childClassName;
-        if (isSequentialAnimation) charSpan.classList.add('first-animation');
-        charSpan.textContent = char;
-        charSpan.style.animationDelay = \`\${delay}s\`;
-        element.appendChild(charSpan);
-        charElements.push(charSpan);
-        delay += 0.05;
-      });
-
-      if (isSequentialAnimation) {
-        setTimeout(() => {
-          charElements.forEach((charSpan, idx) => {
-            charSpan.classList.remove('first-animation');
-            charSpan.classList.add('second-animation');
-            charSpan.style.animationDelay = \`\${idx * 0.03}s\`;
+    const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (!animatedElements.get(entry.target)) {
+                animateElement(entry.target);
+                animatedElements.set(entry.target, true);
+              }
+            }
           });
-        }, (delay + 0.3) * 1000);
+        },
+        {
+          threshold: 0.2,
+        }
+      );
+
+      function resetElement(element) {
+        const originalText = originalTexts.get(element);
+        if (originalText) {
+          element.innerHTML = originalText;
+        }
+      }
+        
+      function animateElement(element) {
+        const className = element.className;
+        if (!className) return;
+        if (!originalTexts.has(element)) {
+          originalTexts.set(element, element.textContent.trim());
+        }
+
+        const text = element.textContent.trim();
+        element.innerHTML = '';
+
+        if (animationSettings.delayBeforeStart !== '0s') {
+         element.style.animation = 'js-text-animation-parent-' + animationIdentifier + ' ' + animationSettings.delayBeforeStart + ' forwards';
+
+          element.addEventListener(
+            'animationend',
+            function () {
+              createAndAnimateCharacters();
+            },
+            { once: true }
+          );
+        } else {
+          createAndAnimateCharacters();
+        }
+
+        function createAndAnimateCharacters() {
+          const characters = text.split('');
+          const childClassName = getChildClassName(className);
+          const animationDalay = 0.01;
+          let delay = 0;
+
+          const totalChars = characters.length;
+          const isSequentialAnimation = className.includes('colorLRRL');
+          const charElements = [];
+
+          characters.forEach((char, index) => {
+            const charSpan = document.createElement('span');
+            charSpan.className = childClassName;
+
+            if (isSequentialAnimation) {
+              charSpan.classList.add('first-animation');
+            }
+
+            charSpan.textContent = char;
+
+            const position = index / (totalChars - 1 || 1);
+            let totalSlowdownFactor = 0;
+
+            if (slowdownEffect) {
+              if (position < 0.33) {
+              } else if (position < 0.5) {
+                const normalizedPos = (position - 0.33) / (0.5 - 0.33);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              } else if (position < 0.7) {
+                const normalizedPos = 1 - (position - 0.5) / (0.7 - 0.5);
+                totalSlowdownFactor += Math.pow(normalizedPos, 2) * 5;
+              }
+            }
+
+            if (endSlowdownEffect && position >= 0.6) {
+              const normalizedEndPos = (position - 0.6) / (1 - 0.6);
+              totalSlowdownFactor += Math.pow(normalizedEndPos, 2) * 3;
+            }
+
+            delay += animationDalay * (1 + totalSlowdownFactor);
+            charSpan.style.animationDelay = delay + 's';
+            element.appendChild(charSpan);
+            charElements.push(charSpan);
+          });
+
+          if (isSequentialAnimation) {
+            const firstAnimationDuration = 0.3;
+            const totalFirstAnimationTime = delay + firstAnimationDuration + 0.1;
+
+            setTimeout(() => {
+              let secondDelay = 0;
+
+              charElements.forEach((charSpan, index) => {
+                const position = index / (totalChars - 1 || 1);
+                let totalSlowdownFactor = 0;
+
+                secondDelay += animationDalay * (0.5 + totalSlowdownFactor);
+
+                charSpan.classList.remove('first-animation');
+                charSpan.classList.add('second-animation');
+                charSpan.style.animationDelay = secondDelay + 's';
+              });
+            }, totalFirstAnimationTime * 1000);
+          }
+
+          requestAnimationFrame(() => {
+            element.style.visibility = 'visible';
+          });
+        }
       }
 
-      element.style.visibility = 'visible';
-    }
-
-    textElements.forEach((element) => observer.observe(element));
+      textElements.forEach((element) => {
+        observer.observe(element);
+      });   
   });
 <\/script>
 
@@ -100,68 +182,68 @@ function initChangeGenerator() {
 
   }
 
-  @keyframes js-text-animation-parent {
+  @keyframes js-text-animation-parent-${animationIdentifier} {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
 
   /* Стили для разных типов анимации */
-  .js-text-animation-fadeLR-child {
+  .js-text-animation-fadeLR-child-${animationIdentifier} {
     display: inline-block;
     opacity: 0;
-    animation: js-text-animation-fadeLR ${animationSpeed} forwards;
+    animation: js-text-animation-fadeLR-${animationIdentifier} ${animationSpeed} forwards;
   }
-  @keyframes js-text-animation-fadeLR {
+  @keyframes js-text-animation-fadeLR-${animationIdentifier} {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
 
-  .js-text-animation-fadeRL-child {
+  .js-text-animation-fadeRL-child-${animationIdentifier} {
     display: inline-block;
     opacity: 1;
-    animation: js-text-animation-fadeRL ${animationSpeed} forwards;
+    animation: js-text-animation-fadeRL-${animationIdentifier} ${animationSpeed} forwards;
   }
-  @keyframes js-text-animation-fadeRL {
+  @keyframes js-text-animation-fadeRL-${animationIdentifier} {
     0% { opacity: 1; }
     100% { opacity: 0; }
   }
 
-  .js-text-animation-colorLR-child {
+  .js-text-animation-colorLR-child-${animationIdentifier} {
     display: inline-block;
     color: ${colorFrom};
-    animation: js-text-animation-colorLR ${animationSpeed} forwards;
+    animation: js-text-animation-colorLR-${animationIdentifier} ${animationSpeed} forwards;
   }
-  @keyframes js-text-animation-colorLR {
+  @keyframes js-text-animation-colorLR-${animationIdentifier} {
     from { color: ${colorFrom}; }
     to { color: ${colorTo}; }
   }
 
-  .js-text-animation-blureLR-child {
+  .js-text-animation-blureLR-child-${animationIdentifier} {
     display: inline-block;
     filter: blur(${blurAmount});
-    animation: js-text-animation-blureLR ${animationSpeed} forwards;
+    animation: js-text-animation-blureLR-${animationIdentifier} ${animationSpeed} forwards;
   }
-  @keyframes js-text-animation-blureLR {
+  @keyframes js-text-animation-blureLR-${animationIdentifier} {
     from { filter: blur(${blurAmount}); }
     to { filter: blur(0px); }
   }
 
-  .js-text-animation-colorLRRL-child {
+  .js-text-animation-colorLRRL-child-${animationIdentifier} {
     display: inline-block;
     color: ${colorFrom};
   }
-  .js-text-animation-colorLRRL-child.first-animation {
-    animation: js-text-animation-colorLRRL01 ${animationSpeed} forwards;
+  .js-text-animation-colorLRRL-child-${animationIdentifier}.first-animation {
+    animation: js-text-animation-colorLRRL01-${animationIdentifier} ${animationSpeed} forwards;
   }
-  .js-text-animation-colorLRRL-child.second-animation {
-    animation: js-text-animation-colorLRRL02 ${animationSpeed} forwards;
+  .js-text-animation-colorLRRL-child-${animationIdentifier}.second-animation {
+    animation: js-text-animation-colorLRRL02-${animationIdentifier} ${animationSpeed} forwards;
     color: ${colorTo};
   }
-  @keyframes js-text-animation-colorLRRL01 {
+  @keyframes js-text-animation-colorLRRL01-${animationIdentifier} {
     0% { color: ${colorFrom}; }
     100% { color: ${colorTo}; }
   }
-  @keyframes js-text-animation-colorLRRL02 {
+  @keyframes js-text-animation-colorLRRL02-${animationIdentifier} {
     0% { color: ${colorTo}; }
     100% { color: ${colorFrom}; }
   }
