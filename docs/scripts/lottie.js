@@ -5,8 +5,6 @@ function initCodeLottie() {
   const input = container.querySelector('#lottie-url')
   const inputClass = container.querySelector('#lottie-div')
   const inputId = container.querySelector('#lottie-canvas')
-  const inputWidth = container.querySelector('#lottie-width')
-  const inputHeight = container.querySelector('#lottie-height')
   const generateBtn = container.querySelector('#generate-dotlottie')
   const copyBtn = container.querySelector('#copy-dotlottie')
   const title = container.querySelector('#title')
@@ -28,8 +26,6 @@ function initCodeLottie() {
       const url = input.value.trim()
       const className = inputClass.value.trim()
       const canvasId = inputId.value.trim()
-      const width = inputWidth.value.trim() || '300'
-      const height = inputHeight.value.trim() || '300'
 
       if (!isValidDirectLink(url)) {
         alert(
@@ -99,15 +95,7 @@ function initCodeLottie() {
             lottieContainer.style.opacity = '1';
           }
         });
-      <\/script>
-
-      <style>
-        .${className} {
-          width: ${width}px;
-          height: ${height}px;
-          transition: opacity 1s ease-in-out;
-        }
-      </style>`
+      <\/script>`
 
       output.textContent = code
       output.style.display = 'block'

@@ -5,8 +5,6 @@ function initSegmentScrollLottie() {
   const input = container.querySelector('#lottie__url')
   const inputClass = container.querySelector('#lottie__div')
   const inputId = container.querySelector('#lottie__canvas')
-  const inputWidth = container.querySelector('#lottie__width')
-  const inputHeight = container.querySelector('#lottie__height')
   const generateBtn = container.querySelector('#generate__dotlottie')
   const copyBtn = container.querySelector('#copy__dotlottie')
   const title = container.querySelector('#title')
@@ -24,8 +22,6 @@ function initSegmentScrollLottie() {
     const url = input.value.trim()
     const className = inputClass.value.trim()
     const canvasId = inputId.value.trim()
-    const width = inputWidth.value.trim() || '300'
-    const height = inputHeight.value.trim() || '300'
 
     if (!isValidDirectLink(url)) {
       alert(
@@ -56,35 +52,31 @@ function initSegmentScrollLottie() {
       loop: false
     });
 
-    // Конфигурация сегментов
     const segments = [
-      { duration: 3 },  // Первый сегмент - 2 секунды
-      { duration: 3 },  // Второй сегмент - 2 секунды
-      { duration: 0 }   // Третий сегмент - до конца
+      { duration: 3 },
+      { duration: 3 },
+      { duration: 0 }
     ];
+
     let currentSegment = 0;
     let segmentStartTime = 0;
     let segmentEndTime = 0;
 
-    // Функция воспроизведения текущего сегмента
     const playCurrentSegment = () => {
       if (currentSegment >= segments.length) return;
       
       const segment = segments[currentSegment];
       
-      // Для последнего сегмента просто воспроизводим до конца
       if (currentSegment === segments.length - 1) {
         animation.play();
         return;
       }
       
-      // Рассчитываем время окончания сегмента
       segmentStartTime = animation.currentTime;
       segmentEndTime = segmentStartTime + segment.duration;
       
       animation.play();
       
-      // Устанавливаем таймер для паузы в конце сегмента
       setTimeout(() => {
         if (animation.isPlaying) {
           animation.pause();
@@ -93,7 +85,6 @@ function initSegmentScrollLottie() {
       }, segment.duration * 1000);
     };
 
-    // Проверка прогресса анимации
     const checkAnimationProgress = () => {
       if (currentSegment < segments.length - 1 && 
           animation.currentTime >= segmentEndTime) {
@@ -102,13 +93,10 @@ function initSegmentScrollLottie() {
       }
     };
 
-    // Обработчик для анимации
     animation.addEventListener('frame', checkAnimationProgress);
 
-    // Воспроизведение первого сегмента
     playCurrentSegment();
 
-    // Обработчик скролла
     let scrollDebounce;
     const handleScroll = () => {
       clearTimeout(scrollDebounce);
@@ -116,15 +104,14 @@ function initSegmentScrollLottie() {
         if (!animation.isPlaying && currentSegment < segments.length) {
           playCurrentSegment();
           
-          // Если все сегменты воспроизведены, удаляем обработчик
           if (currentSegment >= segments.length) {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('wheel', handleScroll);
           }
         }
       }, 100);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleScroll, { passive: true });
   };
 
   if (document.readyState === 'complete') {
@@ -132,14 +119,7 @@ function initSegmentScrollLottie() {
   } else {
     window.addEventListener('load', initLottieAnimation);
   }
-<\/script>
-
-<style>
-  .${className} {
-    width: ${width}px;
-    height: ${height}px;
-  }
-</style>`
+<\/script>`
 
     output.textContent = code
     output.style.display = 'block'

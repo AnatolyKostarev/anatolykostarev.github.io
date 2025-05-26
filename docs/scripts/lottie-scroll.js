@@ -5,8 +5,6 @@ function initCodeByScrollLottie() {
   const input = container.querySelector('#lottie_url')
   const inputClass = container.querySelector('#lottie_div')
   const inputId = container.querySelector('#lottie_canvas')
-  const inputWidth = container.querySelector('#lottie_width')
-  const inputHeight = container.querySelector('#lottie_height')
   const generateBtn = container.querySelector('#generate_dotlottie')
   const copyBtn = container.querySelector('#copy_dotlottie')
   const title = container.querySelector('#title')
@@ -25,8 +23,6 @@ function initCodeByScrollLottie() {
       const url = input.value.trim()
       const className = inputClass.value.trim()
       const canvasId = inputId.value.trim()
-      const width = inputWidth.value.trim() || '300'
-      const height = inputHeight.value.trim() || '300'
 
       if (!isValidDirectLink(url)) {
         alert(
@@ -43,6 +39,8 @@ function initCodeByScrollLottie() {
 
     const canvas = document.createElement('canvas');
     canvas.id = "${canvasId}";
+    canvas.width = lottieContainer.clientWidth;
+    canvas.height = lottieContainer.clientHeight;
     canvas.style.width = "100%";
     canvas.style.height = "100%";
 
@@ -56,21 +54,18 @@ function initCodeByScrollLottie() {
       loop: true
     });
 
-    // Play animation on any scroll event
     const playOnAnyScroll = () => {
       if (!animation.isPlaying) {
         animation.play();
       }
     };
 
-    // Add scroll listener with debounce
     let scrollTimeout;
-    window.addEventListener('scroll', () => {
+    window.addEventListener('wheel', () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(playOnAnyScroll, 100);
     }, { passive: true });
 
-    // Also play on initial load
     playOnAnyScroll();
   };
 
@@ -79,14 +74,13 @@ function initCodeByScrollLottie() {
   } else {
     window.addEventListener('load', initLottieAnimation);
   }
-<\/script>
 
- <style>
-    .${className} {
-      width: ${width}px;
-      height: ${height}px;
-    }
-  </style>`
+  window.addEventListener('resize', () => {
+    canvas.width = lottieContainer.clientWidth;
+    canvas.height = lottieContainer.clientHeight;
+    animation.resize();
+  });
+<\/script>`
       output.textContent = code
       output.style.display = 'block'
       copyBtn.style.display = 'inline-block'
