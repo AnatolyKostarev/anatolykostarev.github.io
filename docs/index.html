@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="./styles/lottieByScroll.css">
   <link rel="stylesheet" href="./styles/lottieSegment.css">
   <link rel="stylesheet" href="./styles/stairs-text.css">
-  <link rel="stylesheet" href="./styles/change-text.css">
   <link rel="stylesheet" href="./styles/counter-text.css">
   <link rel="stylesheet" href="./styles/page-vertical-scroll.css">
   <link rel="stylesheet" href="./styles/page-horizontal-scroll.css">
@@ -51,9 +50,6 @@
             if (typeof initStairsTextGenerator === 'function') {
               initStairsTextGenerator();
             }
-            if (typeof initChangeGenerator === 'function') {
-              initChangeGenerator();
-            }
             if (typeof initCounterGenerator === 'function') {
               initCounterGenerator();
             }
@@ -72,6 +68,10 @@
             if (typeof initBlurLRGenerator === 'function') {
               initBlurLRGenerator();
             }
+            if (typeof initColorLRGenerator === 'function') {
+              initColorLRGenerator();
+            }
+
           });
         }
       ]
@@ -82,10 +82,10 @@
   <script src="./scripts/lottie-scroll.js" defer></script>
   <script src="./scripts/lottie-segment-animation.js" defer></script>
   <script src="./scripts/stairs-text.js" defer></script>
-  <script src="./scripts/change-text.js" defer></script>
   <script src="./scripts/fadeLR-text-animation.js" defer></script>
   <script src="./scripts/fadeRL-text-animation.js" defer></script>
   <script src="./scripts/blurLR-text-animation.js" defer></script>
+  <script src="./scripts/colorLR-text-animations.js" defer></script>
   <script src="./scripts/counter-text.js" defer></script>
   <script src="./scripts/page-vertical.scroll.js" defer></script>
   <script src="./scripts/page-horizontal-scroll.js" defer></script>

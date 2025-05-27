@@ -1,6 +1,7 @@
 #fadeLR-generator,
 #fadeRL-generator,
-#blureLR-generator {
+#blureLR-generator,
+#colorLR-generator {
   margin: 20px 0;
   padding: 15px;
   background: #f9f9f9;
@@ -10,17 +11,23 @@
 
 #fadeLR-animationID,
 #fadeRL-animationID,
+#colorLR-animationID,
 #blureLR-animationID,
 #blureLR-blurAmount,
 #fadeLR-animationSpeed,
 #fadeRL-animationSpeed,
 #blureLR-animationSpeed,
+#colorLR-animationSpeed,
 #fadeLR-animationDalay,
 #fadeRL-animationDalay,
 #blureLR-animationDalay,
+#colorLR-animationDalay,
 #fadeLR-delayBeforeStart,
 #fadeRL-delayBeforeStart,
-#blureLR-delayBeforeStart {
+#blureLR-delayBeforeStart,
+#colorLR-delayBeforeStart,
+#colorLR-colorFrom,
+#colorLR-colorTo {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
@@ -29,7 +36,8 @@
 
 #generate-fadeLR,
 #generate-fadeRL,
-#generate-blureLR {
+#generate-blureLR,
+#generate-colorLR {
   padding: 8px 16px;
   background: #4caf50;
   color: #fff;
@@ -40,7 +48,8 @@
 
 #copy-fadeLR,
 #copy-fadeRL,
-#copy-blureLR {
+#copy-blureLR,
+#copy-colorLR {
   display: none;
   padding: 8px 16px;
   margin-left: 10px;
@@ -53,7 +62,8 @@
 
 #fadeLR-output,
 #fadeRL-output,
-#blureLR-output {
+#blureLR-output,
+#colorLR-output {
   margin-top: 15px;
   background: #eee;
   padding: 10px;
