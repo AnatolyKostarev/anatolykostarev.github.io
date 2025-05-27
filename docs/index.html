@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./styles/counter-text.css">
   <link rel="stylesheet" href="./styles/page-vertical-scroll.css">
   <link rel="stylesheet" href="./styles/page-horizontal-scroll.css">
+  <link rel="stylesheet" href="./styles/change-fade-text-animation.css">
 </head>
 
 <body>
@@ -62,6 +63,15 @@
             if (typeof initHorFullpageGenerator === 'function') {
               initHorFullpageGenerator();
             }
+            if (typeof initFadeLRGenerator === 'function') {
+              initFadeLRGenerator();
+            }
+            if (typeof initFadeRLGenerator === 'function') {
+              initFadeRLGenerator();
+            }
+            if (typeof initBlurLRGenerator === 'function') {
+              initBlurLRGenerator();
+            }
           });
         }
       ]
@@ -73,6 +83,9 @@
   <script src="./scripts/lottie-segment-animation.js" defer></script>
   <script src="./scripts/stairs-text.js" defer></script>
   <script src="./scripts/change-text.js" defer></script>
+  <script src="./scripts/fadeLR-text-animation.js" defer></script>
+  <script src="./scripts/fadeRL-text-animation.js" defer></script>
+  <script src="./scripts/blurLR-text-animation.js" defer></script>
   <script src="./scripts/counter-text.js" defer></script>
   <script src="./scripts/page-vertical.scroll.js" defer></script>
   <script src="./scripts/page-horizontal-scroll.js" defer></script>

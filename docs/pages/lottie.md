@@ -45,14 +45,14 @@
 <!-- markdownlint-disable MD033 -->
 
 <div id="dotlottie-generator">
-  <label for="lottie-url" style="font-weight:bold;">URL анимации (.json или .lottie):</label>
+  <label for="lottie-url" style="font-weight:bold; color: #000">URL анимации (.json или .lottie):</label>
   <input type="text" id="lottie-url" value="https://lottie.host/3b708674-ffd6-4a3b-90b4-4d926c311ff5/tRKFgr4YCB.lottie">
-  <label for="lottie-div" style="font-weight:bold;">Имя класса для div-контейнера Lottie:</label>
+  <label for="lottie-div" style="font-weight:bold; color: #000">Имя класса для div-контейнера Lottie:</label>
   <input type="text" id="lottie-div" value="js-lottie">
-  <label for="lottie-canvas" style="font-weight:bold;">Имя для canvas-контейнера Lottie:</label>
+  <label for="lottie-canvas" style="font-weight:bold; color: #000">Имя для canvas-контейнера Lottie:</label>
   <input type="text" id="lottie-canvas" value="canvas">
   <div style="margin: 10px 0;">
-    <label style="font-weight:bold;">Поведение при клике на анимацию:</label>
+    <label style="font-weight:bold; color: #000">Поведение при клике на анимацию:</label>
     <div>
       <input type="radio" id="click-none" name="click-behavior" value="none" checked>
       <label for="click-none">Ничего не делать</label>

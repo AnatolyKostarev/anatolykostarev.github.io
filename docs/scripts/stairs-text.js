@@ -3,8 +3,12 @@ function initStairsTextGenerator() {
   if (!container) return
 
   const animationIdInput = container.querySelector('#animationIdentifier')
+  const animationDelayInput = container.querySelector('#animationDalay')
   const animationSpeedInput = container.querySelector('#animationSpeed')
   const initialOpacityInput = container.querySelector('#start-opacity')
+  const slowdownEffectCheckbox = container.querySelector('#slowdownEffect')
+  const endSlowdownEffectCheckbox =
+    container.querySelector('#endSlowdownEffect')
   const generateBtn = container.querySelector('#generate-stairs')
   const copyBtn = container.querySelector('#copy-stairs')
   const title = container.querySelector('#title')
@@ -15,6 +19,9 @@ function initStairsTextGenerator() {
       const animationIdentifier = animationIdInput.value.trim() || 'js-script'
       const animationSpeed = animationSpeedInput.value.trim() || '0.3s'
       const initialOpacity = initialOpacityInput.value.trim() || '1'
+      const animationDelay = animationDelayInput.value.trim() || '0.1'
+      const slowdownEffect = slowdownEffectCheckbox.checked
+      const endSlowdownEffect = endSlowdownEffectCheckbox.checked
 
       const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
@@ -33,8 +40,8 @@ function initStairsTextGenerator() {
       animationSpeed: '${animationSpeed}',
     };
 
-     const slowdownEffect = false;
-    const endSlowdownEffect = false;
+    const slowdownEffect = ${slowdownEffect};
+    const endSlowdownEffect = ${endSlowdownEffect};
 
     const originalTexts = new Map();
     const animatedElements = new Map();
@@ -75,7 +82,7 @@ function initStairsTextGenerator() {
           const characters = text.split('');
           const childClassName = getChildClassName(className);
 
-          const animationDalay = 0.1;
+          const animationDalay = ${animationDelay};
           let delay = 0;
 
           const totalChars = characters.length;

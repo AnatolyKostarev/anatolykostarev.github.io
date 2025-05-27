@@ -1,4 +1,6 @@
-#stairs-generator {
+#fadeLR-generator,
+#fadeRL-generator,
+#blureLR-generator {
   margin: 20px 0;
   padding: 15px;
   background: #f9f9f9;
@@ -6,18 +8,28 @@
   max-width: 700px;
 }
 
-#text,
-#animationIdentifier,
-#animationSpeed,
-#start-opacity,
-#animationDalay {
+#fadeLR-animationID,
+#fadeRL-animationID,
+#blureLR-animationID,
+#blureLR-blurAmount,
+#fadeLR-animationSpeed,
+#fadeRL-animationSpeed,
+#blureLR-animationSpeed,
+#fadeLR-animationDalay,
+#fadeRL-animationDalay,
+#blureLR-animationDalay,
+#fadeLR-delayBeforeStart,
+#fadeRL-delayBeforeStart,
+#blureLR-delayBeforeStart {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
   box-sizing: border-box;
 }
 
-#generate-stairs {
+#generate-fadeLR,
+#generate-fadeRL,
+#generate-blureLR {
   padding: 8px 16px;
   background: #4caf50;
   color: #fff;
@@ -26,7 +38,9 @@
   cursor: pointer;
 }
 
-#copy-stairs {
+#copy-fadeLR,
+#copy-fadeRL,
+#copy-blureLR {
   display: none;
   padding: 8px 16px;
   margin-left: 10px;
@@ -37,7 +51,9 @@
   cursor: pointer;
 }
 
-#stairs-output {
+#fadeLR-output,
+#fadeRL-output,
+#blureLR-output {
   margin-top: 15px;
   background: #eee;
   padding: 10px;
@@ -46,11 +62,4 @@
   display: none;
   font-family: Consolas, monospace;
   color: #000000;
-}
-
-.checkbox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
 }
