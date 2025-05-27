@@ -1,3 +1,5 @@
+#t1-generator,
+#t2-generator,
 #counter-generator {
   margin: 20px 0;
   padding: 15px;
@@ -6,17 +8,29 @@
   max-width: 700px;
 }
 
+#t1-animationID,
+#t2-animationID,
 #counter-animationID,
 #counter-animationSpeed,
+#t1-animationSpeed,
+#t2-animationSpeed,
 #counter-startOpacityT1,
-#counter-opacityT2 {
+#t1-startOpacityT1,
+#t2-startOpacityt2,
+#counter-opacityT2,
+#t1-opacityT2,
+#t1-animationDalay,
+#t2-animationDalay {
   width: 100%;
   padding: 8px;
   margin: 8px 0;
   box-sizing: border-box;
 }
 
+#generate-t1,
+#generate-t2,
 #generate-counter {
+  margin-top: 20px;
   padding: 8px 16px;
   background: #4caf50;
   color: #fff;
@@ -25,6 +39,8 @@
   cursor: pointer;
 }
 
+#copy-t1,
+#copy-t2,
 #copy-counter {
   display: none;
   padding: 8px 16px;
@@ -36,6 +52,8 @@
   cursor: pointer;
 }
 
+#t1-output,
+#t2-output,
 #counter-output {
   margin-top: 15px;
   background: #eee;

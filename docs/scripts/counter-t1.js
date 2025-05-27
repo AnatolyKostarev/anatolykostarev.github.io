@@ -1,22 +1,28 @@
-function initCounterGenerator() {
-  const container = document.getElementById('counter-generator')
+function initCounterT1Generator() {
+  const container = document.getElementById('t1-generator')
   if (!container) return
 
-  const animationIdInput = container.querySelector('#counter-animationID')
-  const speedInput = container.querySelector('#counter-animationSpeed')
-  const opacityT1Input = container.querySelector('#counter-startOpacityT1')
-  const opacityT2Input = container.querySelector('#counter-opacityT2')
-  const generateBtn = container.querySelector('#generate-counter')
-  const copyBtn = container.querySelector('#copy-counter')
+  const animationIdInput = container.querySelector('#t1-animationID')
+  const animationDelayInput = container.querySelector('#t1-animationDalay')
+  const speedInput = container.querySelector('#t1-animationSpeed')
+  const opacityT1Input = container.querySelector('#t1-startOpacityT1')
+  const slowdownEffectCheckbox = container.querySelector('#t1-slowdownEffect')
+  const endSlowdownEffectCheckbox = container.querySelector(
+    '#t1-endSlowdownEffect'
+  )
+  const generateBtn = container.querySelector('#generate-t1')
+  const copyBtn = container.querySelector('#copy-t1')
   const title = container.querySelector('#title')
-  const output = container.querySelector('#counter-output')
+  const output = container.querySelector('#t1-output')
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
       const animationIdentifier = animationIdInput.value.trim() || 'js-script'
       const animationSpeed = speedInput.value.trim() || '2.5s'
       const startOpacityT1 = opacityT1Input.value.trim() || '0'
-      const opacityT2 = opacityT2Input.value.trim() || '0.5'
+      const animationDelay = animationDelayInput.value.trim() || '0.1'
+      const slowdownEffect = slowdownEffectCheckbox.checked
+      const endSlowdownEffect = endSlowdownEffectCheckbox.checked
 
       const code = `<script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -32,11 +38,11 @@ function initCounterGenerator() {
         const animationSettings = {
           animationSpeed: '${animationSpeed}',
           startOpacityT1: ${startOpacityT1},
-          opacityT2: ${opacityT2},
+          opacityT2: 0.5,
         };
 
-         const slowdownEffect = false;
-        const endSlowdownEffect = false;
+        const slowdownEffect = ${slowdownEffect};
+        const endSlowdownEffect = ${endSlowdownEffect};
 
         const originalTexts = new Map();
         const animatedElements = new Map();
@@ -77,7 +83,7 @@ function initCounterGenerator() {
           const characters = text.split('');
           const childClassName = getChildClassName(className);
 
-          const animationDalay = 0.1;
+          const animationDalay = ${animationDelay};
           let delay = 0;
 
           const totalChars = characters.length;
@@ -172,7 +178,7 @@ function initCounterGenerator() {
   .js-counter-text-animation-t2-child-${animationIdentifier}-second {
     animation: js-counter-text-animation-t2-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(0);
-    opacity: ${opacityT2};
+    opacity: 0.5;
   }
 
   @keyframes js-counter-text-animation-t2-child-${animationIdentifier}-second {

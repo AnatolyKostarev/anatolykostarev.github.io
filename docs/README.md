@@ -9,6 +9,7 @@
 * [Text - анимация побуквенный blur](/pages/change-blur-text-animation.md)
 * [Text - анимация побуквенного изменения цвета](/pages/change-colorLR-text-animation.md)
 * [Text - анимация двойного изменения цвета](/pages/change-colorLRRL-text-animation.md)
-* [Text - анимация прокрутки текста](/pages/counter-text-animation.md)
+* [Text - анимация прокрутки с заменой](/pages/counter-t1.md)
+* [Text - анимация прокрутки дублирующего слоя](/pages/counter-t2.md)
 * [Page Scroll - анимация вертикального скролла](/pages/page-vertical-scroll.md)
 * [Page Scroll - анимация горизантального скролла](/pages/page-horizontal-scroll.md)

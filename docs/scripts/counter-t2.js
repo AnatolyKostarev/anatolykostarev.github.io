@@ -1,22 +1,28 @@
-function initCounterGenerator() {
-  const container = document.getElementById('counter-generator')
+function initCounterT2Generator() {
+  const container = document.getElementById('t2-generator')
   if (!container) return
 
-  const animationIdInput = container.querySelector('#counter-animationID')
-  const speedInput = container.querySelector('#counter-animationSpeed')
-  const opacityT1Input = container.querySelector('#counter-startOpacityT1')
-  const opacityT2Input = container.querySelector('#counter-opacityT2')
-  const generateBtn = container.querySelector('#generate-counter')
-  const copyBtn = container.querySelector('#copy-counter')
+  const animationIdInput = container.querySelector('#t2-animationID')
+  const animationDelayInput = container.querySelector('#t2-animationDalay')
+  const speedInput = container.querySelector('#t2-animationSpeed')
+  const opacityT2Input = container.querySelector('#t2-startOpacityt2')
+  const slowdownEffectCheckbox = container.querySelector('#t2-slowdownEffect')
+  const endSlowdownEffectCheckbox = container.querySelector(
+    '#t2-endSlowdownEffect'
+  )
+  const generateBtn = container.querySelector('#generate-t2')
+  const copyBtn = container.querySelector('#copy-t2')
   const title = container.querySelector('#title')
-  const output = container.querySelector('#counter-output')
+  const output = container.querySelector('#t2-output')
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
       const animationIdentifier = animationIdInput.value.trim() || 'js-script'
       const animationSpeed = speedInput.value.trim() || '2.5s'
-      const startOpacityT1 = opacityT1Input.value.trim() || '0'
-      const opacityT2 = opacityT2Input.value.trim() || '0.5'
+      const startOpacityT2 = opacityT2Input.value.trim() || '0.5'
+      const animationDelay = animationDelayInput.value.trim() || '0.1'
+      const slowdownEffect = slowdownEffectCheckbox.checked
+      const endSlowdownEffect = endSlowdownEffectCheckbox.checked
 
       const code = `<script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -31,12 +37,12 @@ function initCounterGenerator() {
 
         const animationSettings = {
           animationSpeed: '${animationSpeed}',
-          startOpacityT1: ${startOpacityT1},
-          opacityT2: ${opacityT2},
+          startOpacityT1: 0,
+          opacityT2: ${startOpacityT2},
         };
 
-         const slowdownEffect = false;
-        const endSlowdownEffect = false;
+        const slowdownEffect = ${slowdownEffect};
+        const endSlowdownEffect = ${endSlowdownEffect};
 
         const originalTexts = new Map();
         const animatedElements = new Map();
@@ -77,7 +83,7 @@ function initCounterGenerator() {
           const characters = text.split('');
           const childClassName = getChildClassName(className);
 
-          const animationDalay = 0.1;
+          const animationDalay = ${animationDelay};
           let delay = 0;
 
           const totalChars = characters.length;
@@ -159,20 +165,20 @@ function initCounterGenerator() {
   .js-counter-text-animation-t1-child-${animationIdentifier}-second {
     animation: js-counter-text-animation-t1-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(100%);
-    opacity: ${startOpacityT1};
+    opacity: 0;
   }
 
   @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-second {
-    0% { transform: translateY(100%); opacity: ${startOpacityT1}; }
-    20% { transform: translateY(0); opacity: ${startOpacityT1}; }
-    50% { transform: translateY(0); opacity: ${startOpacityT1}; }
+    0% { transform: translateY(100%); opacity: 0; }
+    20% { transform: translateY(0); opacity: 0; }
+    50% { transform: translateY(0); opacity: 0; }
     100% { transform: translateY(-100%); opacity: 1; }
   }
 
   .js-counter-text-animation-t2-child-${animationIdentifier}-second {
     animation: js-counter-text-animation-t2-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(0);
-    opacity: ${opacityT2};
+    opacity: ${startOpacityT2};
   }
 
   @keyframes js-counter-text-animation-t2-child-${animationIdentifier}-second {

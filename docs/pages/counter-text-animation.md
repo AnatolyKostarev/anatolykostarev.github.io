@@ -9,7 +9,7 @@
 
 <div id="counter-generator">
   <label for="counter-animationID" style="font-weight:bold;">Идентификатор анимации:</label>
-  <input type="text" id="counter-animationID" value="" placeholder="js-script-03">
+  <input type="text" id="counter-animationID" value="" placeholder="js-script">
   <label for="counter-animationSpeed" style="font-weight:bold;">Скорость анимации:</label>
   <input type="text" id="counter-animationSpeed" value="2.5s" placeholder="2.5s">
   <label for="counter-startOpacityT1" style="font-weight:bold;">Начальная прозрачность анимации второго слоя:</label>

@@ -50,9 +50,6 @@
             if (typeof initStairsTextGenerator === 'function') {
               initStairsTextGenerator();
             }
-            if (typeof initCounterGenerator === 'function') {
-              initCounterGenerator();
-            }
             if (typeof initFullpageGenerator === 'function') {
               initFullpageGenerator();
             }
@@ -71,7 +68,12 @@
             if (typeof initColorLRGenerator === 'function') {
               initColorLRGenerator();
             }
-
+            if (typeof initCounterT1Generator === 'function') {
+              initCounterT1Generator();
+            }
+            if (typeof initCounterT2Generator === 'function') {
+              initCounterT2Generator();
+            }
           });
         }
       ]
@@ -86,7 +88,8 @@
   <script src="./scripts/fadeRL-text-animation.js" defer></script>
   <script src="./scripts/blurLR-text-animation.js" defer></script>
   <script src="./scripts/colorLR-text-animations.js" defer></script>
-  <script src="./scripts/counter-text.js" defer></script>
+  <script src="./scripts/counter-t1.js" defer></script>
+  <script src="./scripts/counter-t2.js" defer></script>
   <script src="./scripts/page-vertical.scroll.js" defer></script>
   <script src="./scripts/page-horizontal-scroll.js" defer></script>
 </body>
