@@ -117,7 +117,7 @@ function initColorLRGenerator() {
           let delay = 0;
 
           const totalChars = characters.length;
-          const isSequentialAnimation = className.includes('colorLRRL');
+          const isSequentialAnimation = className.includes('color-lrrl');
           const charElements = [];
 
           characters.forEach((char, index) => {
@@ -193,70 +193,85 @@ function initColorLRGenerator() {
 
   }
 
-  @keyframes js-text-animation-parent-${animationIdentifier} {
+ @keyframes js-text-animation-parent-${animationIdentifier} {
     0% { opacity: 0; }
+    99% { opacity: 0; }
     100% { opacity: 1; }
   }
 
-  /* Стили для разных типов анимации */
-  .js-text-animation-blureLR-child-${animationIdentifier} {
+   /* Стили для разных типов анимации */
+  .js-text-animation-fade-lr-child-${animationIdentifier} {
     display: inline-block;
     opacity: 0;
-    animation: js-text-animation-blureLR-${animationIdentifier} ${animationSpeed} forwards;
+    animation: js-text-animation-fade-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
+    will-change: opacity;
   }
-  @keyframes js-text-animation-blureLR-${animationIdentifier} {
+
+   @keyframes js-text-animation-fade-lr-${animationIdentifier} {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
 
-  .js-text-animation-blureLR-child-${animationIdentifier} {
+  .js-text-animation-fade-rl-child-${animationIdentifier} {
     display: inline-block;
     opacity: 1;
-    animation: js-text-animation-blureLR-${animationIdentifier} ${animationSpeed} forwards;
+    animation: js-text-animation-fade-rl-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
-  @keyframes js-text-animation-blureLR-${animationIdentifier} {
+
+  @keyframes js-text-animation-fade-rl-${animationIdentifier} {
     0% { opacity: 1; }
     100% { opacity: 0; }
   }
 
-  .js-text-animation-colorLR-child-${animationIdentifier} {
+  .js-text-animation-color-lr-child-${animationIdentifier} {
     display: inline-block;
     color: ${colorFrom};
-    animation: js-text-animation-colorLR-${animationIdentifier} ${animationSpeed} forwards;
+    animation: js-text-animation-color-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
-  @keyframes js-text-animation-colorLR-${animationIdentifier} {
+
+  @keyframes js-text-animation-color-lr-${animationIdentifier} {
     from { color: ${colorFrom}; }
     to { color: ${colorTo}; }
   }
 
-  .js-text-animation-blureLR-child-${animationIdentifier} {
+  .js-text-animation-blure-lr-child-${animationIdentifier} {
     display: inline-block;
     filter: blur(5px);
-    animation: js-text-animation-blureLR-${animationIdentifier} ${animationSpeed} forwards;
+    animation: js-text-animation-blure-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
-  @keyframes js-text-animation-blureLR-${animationIdentifier} {
+
+  @keyframes js-text-animation-blure-lr-${animationIdentifier} {
     from { filter: blur(5px); }
     to { filter: blur(0px); }
   }
 
-  .js-text-animation-colorLRRL-child-${animationIdentifier} {
+ .js-text-animation-color-lrrl-child-${animationIdentifier} {
     display: inline-block;
     color: ${colorFrom};
+    transition: all ${animationSpeed} ease;
   }
-  .js-text-animation-colorLRRL-child-${animationIdentifier}.first-animation {
-    animation: js-text-animation-colorLRRL01-${animationIdentifier} ${animationSpeed} forwards;
+
+ .js-text-animation-color-lrrl-child-${animationIdentifier}.first-animation {
+    animation: js-text-animation-color-lrrl-f-${animationIdentifier} ${animationSpeed} forwards;
   }
-  .js-text-animation-colorLRRL-child-${animationIdentifier}.second-animation {
-    animation: js-text-animation-colorLRRL02-${animationIdentifier} ${animationSpeed} forwards;
+
+  .js-text-animation-color-lrrl-child-${animationIdentifier}.second-animation {
+    animation: js-text-animation-color-lrrl-s-${animationIdentifier} ${animationSpeed} forwards;
     color: ${colorTo};
   }
-  @keyframes js-text-animation-colorLRRL01-${animationIdentifier} {
-    0% { color:${colorFrom}; }
+
+   @keyframes js-text-animation-color-lrrl-s-${animationIdentifier} {
+    0% { color: ${colorFrom}; }
     100% { color: ${colorTo}; }
   }
-  @keyframes js-text-animation-colorLRRL02-${animationIdentifier} {
-    0% { color:${colorFrom}; }
-    100% { color: ${colorTo}; }
+
+  @keyframes js-text-animation-color-lrrl-f-${animationIdentifier} {
+    0% { color: ${colorTo}; }
+    100% { color: ${colorFrom}; }
   }
 </style>`
 

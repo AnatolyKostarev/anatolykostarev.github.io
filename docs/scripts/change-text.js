@@ -14,7 +14,8 @@ function initChangeGenerator() {
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
-      const animationIdentifier = animationIdInput.value.trim() || 'js-script-01'
+      const animationIdentifier =
+        animationIdInput.value.trim() || 'js-script-01'
       const animationSpeed = speedInput.value.trim() || '0.3s'
       const colorFrom = colorFromInput.value.trim() || '#ffffff'
       const colorTo = colorToInput.value.trim() || '#43a268'
@@ -183,6 +184,7 @@ function initChangeGenerator() {
 
   @keyframes js-text-animation-parent-${animationIdentifier} {
     0% { opacity: 0; }
+    99% { opacity: 0; }
     100% { opacity: 1; }
   }
 
@@ -191,7 +193,10 @@ function initChangeGenerator() {
     display: inline-block;
     opacity: 0;
     animation: js-text-animation-fade-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
+    will-change: opacity;
   }
+    
   @keyframes js-text-animation-fade-lr-${animationIdentifier} {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -201,7 +206,9 @@ function initChangeGenerator() {
     display: inline-block;
     opacity: 1;
     animation: js-text-animation-fade-rl-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
+
   @keyframes js-text-animation-fade-rl-${animationIdentifier} {
     0% { opacity: 1; }
     100% { opacity: 0; }
@@ -211,7 +218,9 @@ function initChangeGenerator() {
     display: inline-block;
     color: ${colorFrom};
     animation: js-text-animation-color-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
+
   @keyframes js-text-animation-color-lr-${animationIdentifier} {
     from { color: ${colorFrom}; }
     to { color: ${colorTo}; }
@@ -221,7 +230,9 @@ function initChangeGenerator() {
     display: inline-block;
     filter: blur(${blurAmount});
     animation: js-text-animation-blure-lr-${animationIdentifier} ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
   }
+
   @keyframes js-text-animation-blure-lr-${animationIdentifier} {
     from { filter: blur(${blurAmount}); }
     to { filter: blur(0px); }
@@ -230,18 +241,23 @@ function initChangeGenerator() {
   .js-text-animation-color-lrrl-child-${animationIdentifier} {
     display: inline-block;
     color: ${colorFrom};
+    transition: all ${animationSpeed} ease;
   }
+
   .js-text-animation-color-lrrl-child-${animationIdentifier}.first-animation {
     animation: js-text-animation-color-lrrl-f-${animationIdentifier} ${animationSpeed} forwards;
   }
+
   .js-text-animation-color-lrrl-child-${animationIdentifier}.second-animation {
     animation: js-text-animation-color-lrrl-s-${animationIdentifier} ${animationSpeed} forwards;
     color: ${colorTo};
   }
+
   @keyframes js-text-animation-color-lrrl-f-${animationIdentifier} {
     0% { color: ${colorFrom}; }
     100% { color: ${colorTo}; }
   }
+    
   @keyframes js-text-animation-color-lrrl-s-${animationIdentifier} {
     0% { color: ${colorTo}; }
     100% { color: ${colorFrom}; }

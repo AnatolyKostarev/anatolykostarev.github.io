@@ -9,7 +9,7 @@
 Для корректной работы текстовой анимации с использованием скрипта необходимо в HTML-разметке добавить:
 <!-- markdownlint-disable MD040 -->
 ```
-<p class="js-text-animation-colorLR js-script">Loremipsum</p>
+<p class="js-text-animation-color-lr js-script">Loremipsum</p>
 ```
 
 <!-- markdownlint-disable MD041 -->
@@ -22,12 +22,12 @@
 <figure>
   <img src="../assets/add-text-element-2.png" class="lottie2" alt="class" />
   <figcaption>В конструкторе в навигационной панели справа необходимо во вкладке Дизайн -> Источники
-  стилей задать название класса `js-text-animation-colorLR js-script` Элемента Text.</figcaption>
+  стилей задать название класса `js-text-animation-color-lr js-script` Элемента Text.</figcaption>
 </figure>
 
 1. **Введите идентификатор анимацию**
 
-   В поле "Идентификатор анимации" укажите `js-script`, что должно соответствовать классу элемента, который вы хотите анимировать. В данном случае это `js-text-animation-colorLR` и `js-script`.
+   В поле "Идентификатор анимации" укажите `js-script`, что должно соответствовать классу элемента, который вы хотите анимировать. В данном случае это `js-text-animation-color-lr` и `js-script`.
 
 2. **Задайте значение задержки перед началом анимации**
 

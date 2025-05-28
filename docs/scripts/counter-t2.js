@@ -134,14 +134,12 @@ function initCounterT2Generator() {
 </script>
 
 <style>
-    .js-counter-text-animation-t1,
-  .js-counter-text-animation-t2 {
+  .js-counter-text-animation-t1 {
     width: 100%;
     flex-wrap: wrap;
   }
 
-  .js-counter-text-animation-t1-child-${animationIdentifier},
-  .js-counter-text-animation-t2-child-${animationIdentifier} {
+  .js-counter-text-animation-t1-child-${animationIdentifier} {
     display: inline-flex;
     flex-direction: column;
     overflow: hidden;
@@ -151,19 +149,32 @@ function initCounterT2Generator() {
   }
 
   .js-counter-text-animation-t1-child-${animationIdentifier}-first {
-    animation: js-counter-text-animation-t1-child-${animationIdentifier}-first ${animationSpeed} forwards;
+    animation:  counter-first ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
     transform: translateY(103%);
   }
 
-  @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-first {
-    0% { transform: translateY(103%); }
-    20% { transform: translateY(0); }
-    50% { transform: translateY(0); }
-    100% { transform: translateY(-110%); }
-  }
+  @keyframes counter-first {
+        0% {
+          transform: translateY(103%);
+        }
+
+        20% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(0);
+        }
+
+        100% {
+          transform: translateY(-110%);
+        }
+      }
 
   .js-counter-text-animation-t1-child-${animationIdentifier}-second {
     animation: js-counter-text-animation-t1-child-${animationIdentifier}-second ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
     transform: translateY(100%);
     opacity: 0;
   }
@@ -175,8 +186,23 @@ function initCounterT2Generator() {
     100% { transform: translateY(-100%); opacity: 1; }
   }
 
+  .js-counter-text-animation-t2 {
+        width: 100%;
+        flex-wrap: wrap;
+  }
+
+  .js-counter-text-animation-t2-child-${animationIdentifier} {
+        display: inline-flex;
+        flex-direction: column;
+        overflow: hidden;
+        vertical-align: bottom;
+        height: 1.02em;
+        line-height: 100%;
+      }
+
   .js-counter-text-animation-t2-child-${animationIdentifier}-second {
     animation: js-counter-text-animation-t2-child-${animationIdentifier}-second ${animationSpeed} forwards;
+    transition: all ${animationSpeed} ease;
     transform: translateY(0);
     opacity: ${startOpacityT2};
   }

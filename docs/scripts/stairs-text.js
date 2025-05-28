@@ -144,7 +144,7 @@ function initStairsTextGenerator() {
   @keyframes js-stairs-text-animation-steps-${animationIdentifier} {
     0% {
       height: 0;
-      opacity: 1;
+      opacity: ${initialOpacity};
     }
     100% {
       height: 1.02em;

@@ -9,12 +9,24 @@
 Для корректной работы текстовой анимации с использованием скрипта необходимо в HTML-разметке добавить:
 <!-- markdownlint-disable MD040 -->
 ```
-<p class="js-text-animation-fadeRL js-script">Loremipsum</p>
+<p class="js-text-animation-fade-rl js-script">Loremipsum</p>
 ```
+<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 -->
+<figure>
+  <img src="../assets/add-text-element-1.png" class="lottie1" alt="div" />
+  <figcaption>В конструкторе в навигационной панели слева необходимо во вкладке Слои создать Элемент - Типографика - Текст</figcaption>
+</figure>
+
+<figure>
+  <img src="../assets/add-text-element-2.png" class="lottie2" alt="class" />
+  <figcaption>В конструкторе в навигационной панели справа необходимо во вкладке Дизайн -> Источники
+  стилей задать название класса `js-text-animation-fade-rl js-script` Элемента Text.</figcaption>
+</figure>
 
 1. **Введите идентификатор анимацию**
 
-   В поле "Идентификатор анимации" укажите `js-script`, что должно соответствовать классу элемента, который вы хотите анимировать. В данном случае это `js-text-animation-fadeRL` и `js-script`.
+   В поле "Идентификатор анимации" укажите `js-script`, что должно соответствовать классу элемента, который вы хотите анимировать. В данном случае это `js-text-animation-fade-rl` и `js-script`.
 
 2. **Задайте значение задержки перед началом анимации**
 

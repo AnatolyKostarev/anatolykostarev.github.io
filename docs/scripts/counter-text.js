@@ -13,7 +13,8 @@ function initCounterGenerator() {
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
-      const animationIdentifier = animationIdInput.value.trim() || 'js-script-03'
+      const animationIdentifier =
+        animationIdInput.value.trim() || 'js-script-03'
       const animationSpeed = speedInput.value.trim() || '2.5s'
       const startOpacityT1 = opacityT1Input.value.trim() || '0'
       const opacityT2 = opacityT2Input.value.trim() || '0.5'
@@ -128,7 +129,7 @@ function initCounterGenerator() {
 </script>
 
 <style>
-    .js-counter-text-animation-one,
+  .js-counter-text-animation-one,
   .js-counter-text-animation-two {
     width: 100%;
     flex-wrap: wrap;
