@@ -16,6 +16,11 @@ function initHorFullpageGenerator() {
         return
       }
 
+      const evenPagesSelector = Array.from(
+        { length: Math.floor(maxCountPages / 2) },
+        (_, i) => `.section_${(i + 1) * 2}`
+      ).join(', ')
+
       const code = `<style>
   body, html {
     overflow: hidden;
@@ -50,7 +55,7 @@ function initHorFullpageGenerator() {
   }
 
   /* Horizontal scroll sections */
-  .section_2, .section_4, .section_6 {
+  ${evenPagesSelector} {
     transform: translateX(-100%);
   }
 </style>
@@ -64,11 +69,13 @@ function initHorFullpageGenerator() {
     let animatingPage = false;
     let width = window.innerWidth;
 
+    const evenSectionsSelector = '${evenPagesSelector}';
+
     function updateTransform() {
       if (width >= 320) {
         container.style.transform = \`translateY(\${(activePage - 1) * -100}vh)\`;
         
-        document.querySelectorAll('.section_2, .section_4, .section_6').forEach(section => {
+        document.querySelectorAll(evenSectionsSelector).forEach(section => {
           section.style.transform = 'translateX(-100%)';
         });
 
@@ -80,7 +87,7 @@ function initHorFullpageGenerator() {
         }
       } else {
         container.style.transform = 'none';
-        document.querySelectorAll('.section_2, .section_4, .section_6').forEach(section => {
+         document.querySelectorAll(evenSectionsSelector).forEach(section => {
           section.style.transform = 'translateX(0)';
         });
       }
