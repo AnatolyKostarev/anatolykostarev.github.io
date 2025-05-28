@@ -28,7 +28,7 @@ function initFadeLRGenerator() {
       const endSlowdownEffect = endSlowdownEffectCheckbox.checked
       const delayBeforeStart = delayBeforeStartInput.value.trim() || '0s'
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     const textElements = document.querySelectorAll(\`[class*="js-text-animation"][class*="\${animationIdentifier}"]\`);

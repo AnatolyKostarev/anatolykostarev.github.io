@@ -18,7 +18,7 @@ function initCounterGenerator() {
       const startOpacityT1 = opacityT1Input.value.trim() || '0'
       const opacityT2 = opacityT2Input.value.trim() || '0.5'
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
      const textElements = document.querySelectorAll(\`[class*="js-counter-text-animation"][class*="\${animationIdentifier}"]\`);

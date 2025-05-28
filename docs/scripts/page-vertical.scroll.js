@@ -16,7 +16,7 @@ function initFullpageGenerator() {
         return
       }
 
-      const code = `<style>
+      const code = `<style defer>
   body, html {
     overflow: hidden;
   }
@@ -86,7 +86,6 @@ function initFullpageGenerator() {
       }
     }
 
-    // Mobile touch support
     let touchStartY = 0;
     
     container.addEventListener('touchstart', (e) => {

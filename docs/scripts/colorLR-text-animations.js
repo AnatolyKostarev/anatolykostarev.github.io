@@ -32,7 +32,7 @@ function initColorLRGenerator() {
       const colorFrom = colorFromInput.value.trim() || '#ffffff'
       const colorTo = colorToInput.value.trim() || '#43a268'
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     const textElements = document.querySelectorAll(\`[class*="js-text-animation"][class*="\${animationIdentifier}"]\`);

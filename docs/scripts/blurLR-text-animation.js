@@ -30,7 +30,7 @@ function initBlurLRGenerator() {
       const delayBeforeStart = delayBeforeStartInput.value.trim() || '0s'
       const blurAmount = blurAmountInput.value.trim() || '5px'
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     const textElements = document.querySelectorAll(\`[class*="js-text-animation"][class*="\${animationIdentifier}"]\`);

@@ -55,9 +55,8 @@ function initHorFullpageGenerator() {
   }
 </style>
 
-<script>
+<script defer>
   document.addEventListener('DOMContentLoaded', () => {
-    // --- State variables ---
     const container = document.querySelector('.js-container');
     const MIN_PAGE = 1;
     const MAX_PAGE = ${maxCountPages};
@@ -65,18 +64,14 @@ function initHorFullpageGenerator() {
     let animatingPage = false;
     let width = window.innerWidth;
 
-    // --- Update transform ---
     function updateTransform() {
       if (width >= 320) {
-        // Vertical container transform
         container.style.transform = \`translateY(\${(activePage - 1) * -100}vh)\`;
         
-        // Reset all horizontal transforms first
         document.querySelectorAll('.section_2, .section_4, .section_6').forEach(section => {
           section.style.transform = 'translateX(-100%)';
         });
 
-        // Apply horizontal transform for even pages
         if (activePage % 2 === 0) {
           const currentSection = container.querySelector(\`.section_\${activePage}\`);
           if (currentSection) {
@@ -85,7 +80,6 @@ function initHorFullpageGenerator() {
         }
       } else {
         container.style.transform = 'none';
-        // Reset all internal transforms
         document.querySelectorAll('.section_2, .section_4, .section_6').forEach(section => {
           section.style.transform = 'translateX(0)';
         });
@@ -93,7 +87,6 @@ function initHorFullpageGenerator() {
       container.setAttribute('data-page', activePage);
     }
 
-    // --- Change page ---
     function setActivePage(page) {
       if (page < MIN_PAGE || page > MAX_PAGE) return;
       if (animatingPage || page === activePage) return;
@@ -102,14 +95,12 @@ function initHorFullpageGenerator() {
       updateTransform();
     }
 
-    // --- Determine scroll direction ---
     function getDirection(deltaY) {
       if (deltaY > 0) return 'down';
       if (deltaY < 0) return 'up';
       return null;
     }
 
-    // --- Scroll handler ---
     function onWheel(event) {
       if (animatingPage) return;
       const direction = getDirection(event.deltaY);
@@ -119,7 +110,6 @@ function initHorFullpageGenerator() {
       setActivePage(direction === 'up' ? activePage - 1 : activePage + 1);
     }
 
-    // --- Animation end handler ---
     container.addEventListener('transitionend', event => {
       if (event.target !== container) return;
       setTimeout(() => {
@@ -127,16 +117,13 @@ function initHorFullpageGenerator() {
       }, 500);
     });
 
-    // --- Window resize handler ---
     window.addEventListener('resize', () => {
       width = window.innerWidth;
       updateTransform();
     });
 
-    // --- Mouse wheel subscription ---
     window.addEventListener('wheel', onWheel, { passive: true });
 
-    // --- Initialization ---
     updateTransform();
   });
 <\/script>`

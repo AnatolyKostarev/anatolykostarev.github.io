@@ -24,7 +24,7 @@ function initCounterT2Generator() {
       const slowdownEffect = slowdownEffectCheckbox.checked
       const endSlowdownEffect = endSlowdownEffectCheckbox.checked
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
      const textElements = document.querySelectorAll(\`[class*="js-counter-text-animation"][class*="\${animationIdentifier}"]\`);

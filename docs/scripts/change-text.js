@@ -21,7 +21,7 @@ function initChangeGenerator() {
       const colorTo = colorToInput.value.trim() || '#43a268'
       const blurAmount = blurInput.value.trim() || '5px'
 
-      const code = `<script>
+      const code = `<script defer>
   document.addEventListener('DOMContentLoaded', () => {
     const animationIdentifier = '${animationIdentifier}';
     const textElements = document.querySelectorAll(\`[class*="js-text-animation"][class*="\${animationIdentifier}"]\`);
