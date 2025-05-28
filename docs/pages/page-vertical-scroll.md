@@ -42,6 +42,22 @@
   </div>
 
   ```
+<!-- markdownlint-disable MD029 -->
+
+2. **Вставка сгенерированного кода**
+
+<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 -->
+<figure>
+  <img src="../assets/insert-code-1.png" class="lottie" alt="div" />
+  <figcaption>В конструкторе в навигационной панели слева необходимо во вкладке Страницы выбрать страницу для вставки кода.
+  При наведении на название страницы появляется шестеренка, по которой необходимо кликнуть, чтобы открыть вкладку для настройки страницы</figcaption>
+</figure>
+
+<figure>
+  <img src="../assets/insert-code-2.png" class="lottie" alt="class" />
+  <figcaption>Во вкладке настройки страницы в разделе Пользовательский код нужно вставить сгенерированный код</figcaption>
+</figure>
 
 ---
 
