@@ -59,6 +59,7 @@
   <img src="../assets/insert-code-2.png" class="lottie" alt="class" />
   <figcaption>Во вкладке настройки страницы в разделе Пользовательский код нужно вставить сгенерированный код</figcaption>
 </figure>
+
 ---
 
 ## Форма для генерации кода
