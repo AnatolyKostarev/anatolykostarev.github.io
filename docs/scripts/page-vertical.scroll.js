@@ -16,7 +16,7 @@ function initFullpageGenerator() {
         return
       }
 
-      const code = `<style defer>
+      const code = `<style>
   body, html {
     overflow: hidden;
   }
