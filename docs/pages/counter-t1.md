@@ -12,6 +12,19 @@
 <p class="js-counter-text-animation-t1 js-script">Loremipsum</p>
 ```
 
+<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 -->
+<figure>
+  <img src="../assets/add-text-element-1.png" class="lottie1" alt="div" />
+  <figcaption>В конструкторе в навигационной панели слева необходимо во вкладке Слои создать Элемент - Типографика - Текст</figcaption>
+</figure>
+
+<figure>
+  <img src="../assets/add-text-element-2.png" class="lottie2" alt="class" />
+  <figcaption>В конструкторе в навигационной панели справа необходимо во вкладке Дизайн -> Источники
+  стилей задать название класса `js-counter-text-animation-t1 js-script` Элемента Text.</figcaption>
+</figure>
+
 1. **Введите идентификатор анимацию**
 
    В поле "Идентификатор анимации" укажите `js-script`, что должно соответствовать классу элемента, который вы хотите анимировать. В данном случае это `js-counter-text-animation-t1` и `js-script`.
