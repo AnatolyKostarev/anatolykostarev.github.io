@@ -13,7 +13,7 @@ function initCounterGenerator() {
 
   if (!generateBtn.hasListener) {
     generateBtn.addEventListener('click', () => {
-      const animationIdentifier = animationIdInput.value.trim() || 'js-script'
+      const animationIdentifier = animationIdInput.value.trim() || 'js-script-03'
       const animationSpeed = speedInput.value.trim() || '2.5s'
       const startOpacityT1 = opacityT1Input.value.trim() || '0'
       const opacityT2 = opacityT2Input.value.trim() || '0.5'
@@ -128,14 +128,14 @@ function initCounterGenerator() {
 </script>
 
 <style>
-    .js-counter-text-animation-t1,
-  .js-counter-text-animation-t2 {
+    .js-counter-text-animation-one,
+  .js-counter-text-animation-two {
     width: 100%;
     flex-wrap: wrap;
   }
 
-  .js-counter-text-animation-t1-child-${animationIdentifier},
-  .js-counter-text-animation-t2-child-${animationIdentifier} {
+  .js-counter-text-animation-one-child-${animationIdentifier},
+  .js-counter-text-animation-two-child-${animationIdentifier} {
     display: inline-flex;
     flex-direction: column;
     overflow: hidden;
@@ -144,38 +144,38 @@ function initCounterGenerator() {
     line-height: 100%;
   }
 
-  .js-counter-text-animation-t1-child-${animationIdentifier}-first {
-    animation: js-counter-text-animation-t1-child-${animationIdentifier}-first ${animationSpeed} forwards;
+  .js-counter-text-animation-one-child-${animationIdentifier}-first {
+    animation: js-counter-text-animation-one-child-${animationIdentifier}-first ${animationSpeed} forwards;
     transform: translateY(103%);
   }
 
-  @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-first {
+  @keyframes js-counter-text-animation-one-child-${animationIdentifier}-first {
     0% { transform: translateY(103%); }
     20% { transform: translateY(0); }
     50% { transform: translateY(0); }
     100% { transform: translateY(-110%); }
   }
 
-  .js-counter-text-animation-t1-child-${animationIdentifier}-second {
-    animation: js-counter-text-animation-t1-child-${animationIdentifier}-second ${animationSpeed} forwards;
+  .js-counter-text-animation-one-child-${animationIdentifier}-second {
+    animation: js-counter-text-animation-one-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(100%);
     opacity: ${startOpacityT1};
   }
 
-  @keyframes js-counter-text-animation-t1-child-${animationIdentifier}-second {
+  @keyframes js-counter-text-animation-one-child-${animationIdentifier}-second {
     0% { transform: translateY(100%); opacity: ${startOpacityT1}; }
     20% { transform: translateY(0); opacity: ${startOpacityT1}; }
     50% { transform: translateY(0); opacity: ${startOpacityT1}; }
     100% { transform: translateY(-100%); opacity: 1; }
   }
 
-  .js-counter-text-animation-t2-child-${animationIdentifier}-second {
-    animation: js-counter-text-animation-t2-child-${animationIdentifier}-second ${animationSpeed} forwards;
+  .js-counter-text-animation-two-child-${animationIdentifier}-second {
+    animation: js-counter-text-animation-two-child-${animationIdentifier}-second ${animationSpeed} forwards;
     transform: translateY(0);
     opacity: ${opacityT2};
   }
 
-  @keyframes js-counter-text-animation-t2-child-${animationIdentifier}-second {
+  @keyframes js-counter-text-animation-two-child-${animationIdentifier}-second {
     0% { transform: translateY(0); }
     20% { transform: translateY(-100%); }
     50% { transform: translateY(-100%); }
