@@ -21,7 +21,7 @@ function initFullpageGenerator() {
     overflow: hidden;
   }
 
-  .container {
+  .scroll-container {
     height: 100vh;
     width: 100vw;
     will-change: transform;
@@ -29,7 +29,7 @@ function initFullpageGenerator() {
     position: relative;
   }
 
-  .js-page {
+  .scroll-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,12 +52,18 @@ function initFullpageGenerator() {
 
 <script defer>
   document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.js-container');
+    const container = document.querySelector('.scroll-container');
     const MIN_PAGE = 1;
     const MAX_PAGE = ${maxCountPages};
     let activePage = 1;
     let animatingPage = false;
     let width = window.innerWidth;
+
+    container.setAttribute('data-page', '1');
+    const pages = container.querySelectorAll('.scroll-page');
+    pages.forEach((page, index) => {
+      page.classList.add(\`section_\${index+1}\`);
+    });
 
     function updateTransform() {
       if (width >= 320) {
