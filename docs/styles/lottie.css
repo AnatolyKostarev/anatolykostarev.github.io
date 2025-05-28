@@ -47,3 +47,16 @@
   font-family: Consolas, monospace;
   color: #000000;
 }
+
+.lottie1,
+.lottie2 {
+  display: block;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+.lottie1 {
+  width: 100%;
+  height: auto;
+}

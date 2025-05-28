@@ -14,8 +14,19 @@
 <div class="js-lottie"></div>
 
 ```
+<!-- markdownlint-disable MD041 -->
+<!-- markdownlint-disable MD033 -->
+<figure>
+  <img src="../assets/create-lottie-div.png" class="lottie1" alt="div" />
+  <figcaption>В конструкторе в навигационной панели слева необходимо во вкладке Слои создать Элемент DivBlock.</figcaption>
+</figure>
 
-Также необходимо задать селектору класса `js-lottie` `width` и `height` в пикселях (`px`)
+<figure>
+  <img src="../assets/add-lottie-class.png" class="lottie2" alt="class" />
+  <figcaption>В конструкторе в навигационной панели справа необходимо во вкладке Дизайн -> Источники
+  стилей задать название класса `js-lottie` Элемента DivBlock.</figcaption>
+  <figcaption>Также необходимо задать селектору класса `js-lottie` `width` и `height` в пикселях (`px`)</figcaption>
+</figure>
 
 ## Как использовать
 
